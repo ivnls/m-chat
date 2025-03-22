@@ -5,3 +5,5 @@ educação infantil com o objetivo de realizar as intervenções de forma precoc
 criança perca a melhor fase de estimulação e desenvolvimento. O projeto vai ser direcionado através
 do M-CHAT informatizado como ferramenta de rastreio para se fazer um trabalho que priorize a
 estimulação precoce nos primeiros meses de vida.
+
+<img src="img/img1.png">
