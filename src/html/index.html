@@ -1,0 +1,66 @@
+<!DOCTYPE html5>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>M-CHAT - Início</title>
+</head>
+
+<header class="bg-blue-950 text-white rounded-b-full py-8">
+    <h1 class="text-2xl font-bold">M-CHAT</h1>
+    <p>Cadastro</p>
+</header>
+
+<body class="bg-slate-200 text-center">
+
+    <form id="meuFormulario" class="bg-white shadow-sm m-20 rounded-md px-8 py-8">
+        <h2 class="text-xl font-semibold mb-4 text-center">Cadastro</h2>
+
+        <!-- Nome 1 -->
+        <label class="block mb-2 font-medium">Nome da Mãe</label>
+        <input type="text" id="nome1" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none" required>
+
+        <!-- Nome 2 -->
+        <label class="block mt-4 mb-2 font-medium">Nome Completo da Criança</label>
+        <input type="text" id="nome2" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none" required>
+
+        <!-- Idade -->
+        <label class="block mt-4 mb-2 font-medium">Idade em Meses</label>
+        <input type="number" id="idade" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none" required>
+
+        <!-- Sexo -->
+        <label class="block mt-4 mb-2 font-medium">Sexo</label>
+        <select id="sexo" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none">
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option>
+        </select>
+
+        <!-- Botão de Enviar -->
+        <button type="submit" class="mt-6 w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition">Enviar</button>
+    </form>
+
+    <script>
+        document.getElementById("meuFormulario").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const nomeMae = document.getElementById("nome1").value;
+            const nomeCrianca = document.getElementById("nome2").value;
+            const idade = document.getElementById("idade").value;
+            const sexo = document.getElementById("sexo").value;
+
+            localStorage.setItem("nomeMae", nomeMae);
+            localStorage.setItem("nomeCrianca", nomeCrianca);
+            localStorage.setItem("idade", idade);
+            localStorage.setItem("sexo", sexo);
+
+            window.location.href = "questionario.html";
+        });
+    </script>
+
+</body>
+
+<footer class="bg-blue-950 py-8 rounded-t-full text-white font-semibold">
+    &copyM-CHAT Prototype 2025 | Laboratório de Ideias
+</footer>
+</html>
