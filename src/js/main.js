@@ -66,22 +66,36 @@ function criarPergunta(pergunta, index) {
     checkboxTrue.className = "true-checkbox m-2 w-6 h-6 accent-green-600";
     checkboxTrue.id = `q${index}-true`;
 
+    const labelTrue = document.createElement('span');
+    labelTrue.textContent = "Sim";
+    labelTrue.className = "ms-0.5 mr-2 text-green-600 font-medium";
+
     const checkboxFalse = document.createElement('input');
     checkboxFalse.type = "checkbox";
     checkboxFalse.className = "false-checkbox m-2 w-6 h-6 accent-red-600";
     checkboxFalse.id = `q${index}-false`;
+
+    const labelFalse = document.createElement('span');
+    labelFalse.textContent = "Não";
+    labelFalse.className = "ms-0.5 mr-2 text-red-600 font-medium";
+
+    const separator = document.createElement('div');
+    separator.className = "h-6 w-px bg-gray-400 mx-3";
 
     const label = document.createElement('label');
     label.className = "ms-2 text-sm font-medium text-gray-900";
     label.textContent = pergunta;
 
     container.appendChild(checkboxTrue);
+    container.appendChild(labelTrue);
     container.appendChild(checkboxFalse);
+    container.appendChild(labelFalse);
+    container.appendChild(separator);
     container.appendChild(label);
 
     formulario.insertBefore(container, formulario.querySelector('button'));
 
-    //Cor das divs em relacao com o checkbox
+    // Cor das divs em relação com o checkbox
     checkboxTrue.addEventListener('change', () => {
         if (checkboxTrue.checked) checkboxFalse.checked = false;
         atualizarFundo(container, checkboxTrue.checked, checkboxFalse.checked);
@@ -93,6 +107,7 @@ function criarPergunta(pergunta, index) {
     });
 }
 
+
 function atualizarFundo(container, isTrue, isFalse) {
     container.classList.remove('bg-green-100', 'bg-red-100');
     if (isTrue) container.classList.add('bg-green-100');
@@ -102,10 +117,10 @@ function atualizarFundo(container, isTrue, isFalse) {
 
 document.querySelectorAll(".true-checkbox, .false-checkbox").forEach(checkbox => {
     checkbox.addEventListener("change", function() {
-        const container = this.closest(".flex"); // Obtém o container pai da checkbox
+        const container = this.closest(".flex");
         const aviso = container.querySelector(".aviso");
 
-        // Verifica se pelo menos uma checkbox está marcada
+        //erifica se pelo menos uma checkbox está marcada
         const isChecked = container.querySelector(".true-checkbox").checked || 
                           container.querySelector(".false-checkbox").checked;
 
@@ -117,15 +132,16 @@ document.querySelectorAll(".true-checkbox, .false-checkbox").forEach(checkbox =>
 
             if (!aviso) {
                 const novoAviso = document.createElement("p");
-                novoAviso.className = "aviso text-red-500 text-sm text-right";
+                novoAviso.className = "aviso text-red-500 text-sm absolute right-0";
                 novoAviso.textContent = "Por favor, responda esta pergunta.";
                 container.appendChild(novoAviso);
-            }
+            }            
+            
         }
     });
 });
 
-// Listener para o clique no botão
+//listener do botão do formulário
 document.addEventListener("DOMContentLoaded", () => {
     const botao = document.getElementById("verificarRespostas");
 
@@ -137,8 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const isTrue = container.querySelector(".true-checkbox").checked;
             const isFalse = container.querySelector(".false-checkbox").checked;
             const aviso = container.querySelector(".aviso");
-
-            // Se a pergunta não foi respondida
+            
+            //se não responder a pergunta
             if (!isTrue && !isFalse) {
                 erro = true;
                 container.classList.add("border", "border-red-500");
@@ -153,14 +169,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 container.classList.remove("border", "border-red-500");
                 if (aviso) aviso.remove();
 
-                // Armazena as perguntas marcadas como "Falso"
                 if (isFalse) {
                     indexPerguntasFalsas.push(index);
                 }
             }
         });
 
-        // Se houver erro, interrompe a execução
         if (erro) return;
 
         console.log("Perguntas marcadas como falso: " + indexPerguntasFalsas.join(", "));
@@ -168,12 +182,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const prob = document.getElementById("prob");
         const probText = document.getElementById("prob-text");
 
-        // Número de respostas marcadas como "Falso"
         const fL = indexPerguntasFalsas.length;
 
         console.log(fL);
 
-        // Ajusta a largura dinamicamente
         let widthPercentage;
         let probTextResult;
         let probColor;
@@ -181,18 +193,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (fL <= 2) {
             widthPercentage = "25%";
             probTextResult = "Risco: Baixo";
-            probColor = "#008000"; // Verde
+            probColor = "#008000";
         } else if (fL < 7) {
             widthPercentage = "50%";
             probTextResult = "Risco: Médio";
-            probColor = "#FFFF00"; // Amarelo
+            probColor = "#FFFF00";
         } else {
             widthPercentage = "100%";
             probTextResult = "Risco: Alto";
-            probColor = "#FF0000"; // Vermelho
+            probColor = "#FF0000";
         }
 
-        // Aplica a nova largura com animação
+        //configurações do resultado
         probText.textContent = probTextResult;
         prob.style.transition = "width 0.5s ease, background-color 0.5s ease";
         prob.style.width = widthPercentage;
