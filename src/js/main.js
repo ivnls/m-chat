@@ -1,13 +1,13 @@
 const formulario = document.getElementById('formulario');
 
-//Parâmetros do cadrasto inicial
+//Parâmetros do cadrasto inicial 
+/*
 const nomeMae = localStorage.getItem("nomeMae");
 const nomeCrianca = localStorage.getItem("nomeCrianca");
 const idade = localStorage.getItem("idade");
-const genero = localStorage.getItem("sexo");
+const sexo = localStorage.getItem("sexo");
 
-document.addEventListener("DOMContentLoaded", () => {
-});
+*/
 
 //perguntas do formulario
 
