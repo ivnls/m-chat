@@ -9,3 +9,5 @@ estimulação precoce nos primeiros meses de vida.
 <img src="preview/img0.png">
 <img src="preview/img1.png">
 <img src="preview/img2.png">
+<img src="preview/img3.png">
+<img src="preview/img4.png">

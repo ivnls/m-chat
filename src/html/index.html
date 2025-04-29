@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/reset.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>M-CHAT - Início</title>
 </head>
 
-<header class="bg-blue-950 text-white rounded-b-full py-8">
+<header class="bg-blue-950 text-white rounded-b-full py-4 w-full flex flex-col items-center text-center">
+    <img src="../content/logo.png" class="h-32 w-24 mb-4" alt="Logo M-CHAT">
     <h1 class="text-2xl font-bold">M-CHAT</h1>
     <p>Cadastro</p>
 </header>
 
-<body class="bg-slate-200 text-center">
+<body class="flex flex-col bg-slate-600 items-center text-center">
 
-    <form id="meuFormulario" class="bg-white shadow-sm m-20 rounded-md px-8 py-8">
+    <form id="meuFormulario" class="bg-gray-200 text-center rounded-xl p-8 m-8 shadow-md w-full max-w-2xl">
         <h2 class="text-xl font-semibold mb-4 text-center">Cadastro</h2>
 
         <!-- Mae -->
         <label class="block mb-2 font-medium">Nome da Mãe</label>
         <input type="text" id="nome1" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none" required>
 
-        <!-- Criança -->
+        <!-- Crianca -->
         <label class="block mt-4 mb-2 font-medium">Nome Completo da Criança</label>
         <input type="text" id="nome2" class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none" required>
 
@@ -60,7 +62,8 @@
 
 </body>
 
-<footer class="bg-blue-950 py-8 rounded-t-full text-white font-semibold">
-    &copyM-CHAT Prototype 2025 | Laboratório de Ideias
+<!-- Rodape -->
+<footer class="bg-blue-950 py-8 rounded-t-full text-white font-semibold w-full text-center mt-8">
+    &copy; M-CHAT 2025 | Laboratório de Ideias
 </footer>
 </html>

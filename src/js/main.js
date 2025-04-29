@@ -1,101 +1,100 @@
 const formulario = document.getElementById('formulario');
+const dadosConsulta = document.getElementById('dadosConsulta');
 
-//Parâmetros do cadrasto inicial 
-/*
+//dados do cadrasto inicial 
 const nomeMae = localStorage.getItem("nomeMae");
 const nomeCrianca = localStorage.getItem("nomeCrianca");
 const idade = localStorage.getItem("idade");
 const sexo = localStorage.getItem("sexo");
 
-*/
+//Pegar a data e horario atual
+const data = new Date();
+const dataFormatada = data.toLocaleString("pt-BR");
 
-//perguntas do formulario
+dadosConsulta.querySelector('#nomeMae').textContent += nomeMae;
+dadosConsulta.querySelector('#nomeCrianca').textContent += nomeCrianca;
+dadosConsulta.querySelector('#idade').textContent += idade;
+dadosConsulta.querySelector('#sexo').textContent += sexo;
+dadosConsulta.querySelector('#inicio').textContent += dataFormatada;
 
+//perguntas do formulario com as suas respostas esperadas
 const perguntas = [
-    "Gosta de brincar ao colo fazendo de “cavalinho”, etc.?",
-    "Gosta de subir objectos, como por exemplo, cadeiras, mesas?",
-    "Gosta de jogar às escondidas?",
-    "Brinca ao faz-de-conta, por exemplo, falar ao telefone ou dar de comer a uma boneca, etc.?",
-    "Aponta com o indicador para pedir alguma coisa?",
-    "Brinca apropriadamente com brinquedos (carros ou Legos) sem levá-los à boca, abanar ou deitá-los ao chão?",
-    "A criança mantém contacto visual por mais de um ou dois segundos?",
-    "É muito sensível aos ruídos (ex. tapa os ouvidos)?",
-    "Sorri como resposta às suas expressões faciais ou ao seu sorriso?",
-    "Já anda?",
-    "Olha para as coisas para as quais o adulto está a olhar?",
-    "Faz movimentos estranhos com as mãos/dedos próximo da cara?",
-    "Tenta chamar a sua atenção para o que está a fazer?",
-    "Alguma vez se preocupou quanto à sua audição?",
-    "Compreende o que as pessoas lhe dizem?",
-    "Por vezes fica a olhar para o vazio ou deambula ao acaso pelos espaços?",
-    "Procura a sua reacção facial quando se vê confrontada com situações desconhecidas?"
-];
-  
-const perguntasCruciais = [
-    "Interessa-se pelas outras crianças?",
-    "Aponta com o indicador para mostrar interesse em alguma coisa?",
-    
-    "Alguma vez lhe trouxe objectos (brinquedos) para lhe mostrar alguma coisa?",
-    "Imita o adulto (ex. faz uma careta e ela imita)?",
-    "Responde/olha quando o(a) chamam pelo nome?",
-    "Se apontar para um brinquedo do outro lado da sala, a criança acompanha com o olhar?"
+    { pergunta: "Seu filho gosta de se balançar, de pular no seu joelho, etc.?", resposta: "não" },
+    { pergunta: "Seu filho tem interesse por outras crianças?", resposta: "não" },
+    { pergunta: "Seu filho gosta de subir em coisas, como escadas ou móveis?", resposta: "não" },
+    { pergunta: "Seu filho gosta de brincar de esconder e mostrar o rosto ou de esconde-esconde?", resposta: "não" },
+    { pergunta: "Seu filho já brincou de faz-de-conta, como, por exemplo, fazer de conta que está falando no telefone ou que está cuidando da boneca, ou qualquer outra brincadeira de faz-de-conta?", resposta: "não" },
+    { pergunta: "Seu filho já usou o dedo indicador dele para apontar, para pedir alguma coisa?", resposta: "não" },
+    { pergunta: "Seu filho já usou o dedo indicador dele para apontar, para indicar interesse em algo?", resposta: "não" },
+    { pergunta: "Seu filho consegue brincar de forma correta com brinquedos pequenos (ex. carros ou blocos), sem apenas colocar na boca, remexer no brinquedo ou deixar o brinquedo cair?", resposta: "não" },
+    { pergunta: "O seu filho alguma vez trouxe objetos para você (pais) para lhe mostrar este objeto?", resposta: "não" },
+    { pergunta: "O seu filho olha para você no olho por mais de um segundo ou dois?", resposta: "não" },
+    { pergunta: "O seu filho já pareceu muito sensível ao barulho (ex. tapando os ouvidos)?", resposta: "sim" },
+    { pergunta: "O seu filho sorri em resposta ao seu rosto ou ao seu sorriso?", resposta: "não" },
+    { pergunta: "O seu filho imita você? (ex. você faz expressões/caretas e seu filho imita?)", resposta: "não" },
+    { pergunta: "O seu filho responde quando você chama ele pelo nome?", resposta: "não" },
+    { pergunta: "Se você aponta um brinquedo do outro lado do cômodo, o seu filho olha para ele?", resposta: "não" },
+    { pergunta: "Seu filho já sabe andar?", resposta: "não" },
+    { pergunta: "O seu filho olha para coisas que você está olhando?", resposta: "não" },
+    { pergunta: "O seu filho faz movimentos estranhos com os dedos perto do rosto dele?", resposta: "sim" },
+    { pergunta: "O seu filho tenta atrair a sua atenção para a atividade dele?", resposta: "não" },
+    { pergunta: "Você alguma vez já se perguntou se seu filho é surdo?", resposta: "sim" },
+    { pergunta: "O seu filho entende o que as pessoas dizem?", resposta: "não" },
+    { pergunta: "O seu filho às vezes fica aéreo, “olhando para o nada” ou caminhando sem direção definida?", resposta: "sim" },
+    { pergunta: "O seu filho olha para o seu rosto para conferir a sua reação quando vê algo estranho?", resposta: "não" }
 ];
 
-let indexPerguntasFalsas = [];
-
-
-//iterar sobre as perguntas
+//iterar sobre as perguntas e criar as suas divs
 for (let i = 0; i < perguntas.length; i++) {
-    criarPergunta(perguntas[i], i)
+    criarPergunta(perguntas[i].pergunta, i)
 }
 
-for (let i = 0; i < perguntasCruciais.length; i++) {
-    criarPergunta(perguntasCruciais[i], perguntas.length + i);
-}
-
-//Gerar as divs das perguntas
-
-//implementar a centralizacao da div do formulario com base na maior pergunta, podendo assim definir o tamanho
+//cria a pergunta com os dois checkboxes, texto e divisor
 function criarPergunta(pergunta, index) {
     const container = document.createElement('div');
-    container.className = "flex items-center p-3 mb-2 rounded-md transition-colors";
+    container.className = "flex items-center justify-start gap-6 p-4 mb-3 rounded-lg shadow-sm border border-gray-200 bg-white";
     container.id = `container-q${index}`;
+
+    const opcoes = document.createElement('div');
+    opcoes.className = "flex items-center gap-4";
+
 
     const checkboxTrue = document.createElement('input');
     checkboxTrue.type = "checkbox";
-    checkboxTrue.className = "true-checkbox m-2 w-6 h-6 accent-green-600";
+    checkboxTrue.className = "true-checkbox w-5 h-5 accent-green-600";
     checkboxTrue.id = `q${index}-true`;
 
-    const labelTrue = document.createElement('span');
+    const labelTrue = document.createElement('label');
     labelTrue.textContent = "Sim";
-    labelTrue.className = "ms-0.5 mr-2 text-green-600 font-medium";
+    labelTrue.setAttribute('for', checkboxTrue.id);
+    labelTrue.className = "text-green-600 font-medium cursor-pointer";
+
 
     const checkboxFalse = document.createElement('input');
     checkboxFalse.type = "checkbox";
-    checkboxFalse.className = "false-checkbox m-2 w-6 h-6 accent-red-600";
+    checkboxFalse.className = "false-checkbox w-5 h-5 accent-red-600";
     checkboxFalse.id = `q${index}-false`;
 
-    const labelFalse = document.createElement('span');
+    const labelFalse = document.createElement('label');
     labelFalse.textContent = "Não";
-    labelFalse.className = "ms-0.5 mr-2 text-red-600 font-medium";
+    labelFalse.setAttribute('for', checkboxFalse.id);
+    labelFalse.className = "text-red-600 font-medium cursor-pointer";
 
-    const separator = document.createElement('div');
-    separator.className = "h-6 w-px bg-gray-400 mx-3";
+    opcoes.appendChild(checkboxTrue);
+    opcoes.appendChild(labelTrue);
+    opcoes.appendChild(checkboxFalse);
+    opcoes.appendChild(labelFalse);
 
-    const label = document.createElement('label');
-    label.className = "ms-2 text-sm font-medium text-gray-900";
-    label.textContent = pergunta;
+    const texto = document.createElement('span');
+    texto.className = "text-gray-800 text-base font-normal flex-1";
+    texto.textContent = pergunta;
 
-    container.appendChild(checkboxTrue);
-    container.appendChild(labelTrue);
-    container.appendChild(checkboxFalse);
-    container.appendChild(labelFalse);
-    container.appendChild(separator);
-    container.appendChild(label);
+    container.appendChild(opcoes);
+    container.appendChild(texto);
 
     formulario.insertBefore(container, formulario.querySelector('button'));
 
-    // Cor das divs em relação com o checkbox
+    //comportamento dos checkboxes
     checkboxTrue.addEventListener('change', () => {
         if (checkboxTrue.checked) checkboxFalse.checked = false;
         atualizarFundo(container, checkboxTrue.checked, checkboxFalse.checked);
@@ -107,110 +106,107 @@ function criarPergunta(pergunta, index) {
     });
 }
 
-
+//função que atualiza o fundo da pagina correspondente ao checkbox marcado
 function atualizarFundo(container, isTrue, isFalse) {
     container.classList.remove('bg-green-100', 'bg-red-100');
-    if (isTrue) container.classList.add('bg-green-100');
-    else if (isFalse) container.classList.add('bg-red-100');
+    if (isTrue) {
+        container.classList.add('bg-green-100');
+    } else if (isFalse) {
+        container.classList.add('bg-red-100');
+    }
 }
 
-
+//atualiza o aviso de resposta conforme as checkboxes vão sendo marcadas
 document.querySelectorAll(".true-checkbox, .false-checkbox").forEach(checkbox => {
-    checkbox.addEventListener("change", function() {
-        const container = this.closest(".flex");
+    checkbox.addEventListener("change", () => {
+      const container = checkbox.closest(".flex");
+      const aviso = container.querySelector(".aviso");
+      const algumaMarcada = container.querySelector(".true-checkbox:checked, .false-checkbox:checked");
+  
+      if (algumaMarcada) {
+        container.classList.remove("border", "border-red-500");
+        if (aviso) aviso.remove();
+      } else {
+        container.classList.add("border", "border-red-500");
+        if (!aviso) {
+          container.insertAdjacentHTML("beforeend", `<p class="aviso text-red-500 text-sm absolute right-0">Por favor, responda esta pergunta.</p>`);
+        }
+      }
+    });
+});
+  
+//botão do formulário
+const botao = document.getElementById("verificarRespostas");
+
+botao.onclick = function () {
+    let erro = false;
+    let respostasErradas = 0; //contador de respostas que não correspondem
+
+    document.querySelectorAll("[id^='container-q']").forEach((container, index) => {
+        const trueCheckbox = container.querySelector(".true-checkbox");
+        const falseCheckbox = container.querySelector(".false-checkbox");
+        
+        const isTrueChecked = trueCheckbox && trueCheckbox.checked;
+        const isFalseChecked = falseCheckbox && falseCheckbox.checked;
+
         const aviso = container.querySelector(".aviso");
+        const respostaEsperada = perguntas[index].resposta;
 
-        //erifica se pelo menos uma checkbox está marcada
-        const isChecked = container.querySelector(".true-checkbox").checked || 
-                          container.querySelector(".false-checkbox").checked;
-
-        if (isChecked) {
-            container.classList.remove("border", "border-red-500");
-            if (aviso) aviso.remove();
-        } else {
+        //se nenhuma das checkboxes estiverem marcadas
+        if (!isTrueChecked && !isFalseChecked) {
+            erro = true;
             container.classList.add("border", "border-red-500");
 
             if (!aviso) {
                 const novoAviso = document.createElement("p");
-                novoAviso.className = "aviso text-red-500 text-sm absolute right-0";
+                novoAviso.className = "aviso text-red-500 text-sm text-right";
                 novoAviso.textContent = "Por favor, responda esta pergunta.";
                 container.appendChild(novoAviso);
-            }            
-            
-        }
-    });
-});
-
-//listener do botão do formulário
-document.addEventListener("DOMContentLoaded", () => {
-    const botao = document.getElementById("verificarRespostas");
-
-    botao.addEventListener("click", () => {
-        let erro = false;
-        let indexPerguntasFalsas = [];
-
-        document.querySelectorAll(".flex").forEach((container, index) => {
-            const isTrue = container.querySelector(".true-checkbox").checked;
-            const isFalse = container.querySelector(".false-checkbox").checked;
-            const aviso = container.querySelector(".aviso");
-            
-            //se não responder a pergunta
-            if (!isTrue && !isFalse) {
-                erro = true;
-                container.classList.add("border", "border-red-500");
-
-                if (!aviso) {
-                    const novoAviso = document.createElement("p");
-                    novoAviso.className = "aviso text-red-500 text-sm text-right";
-                    novoAviso.textContent = "Por favor, responda esta pergunta.";
-                    container.appendChild(novoAviso);
-                }
-            } else {
-                container.classList.remove("border", "border-red-500");
-                if (aviso) aviso.remove();
-
-                if (isFalse) {
-                    indexPerguntasFalsas.push(index);
-                }
             }
-        });
 
-        if (erro) return;
-
-        console.log("Perguntas marcadas como falso: " + indexPerguntasFalsas.join(", "));
-
-        const prob = document.getElementById("prob");
-        const probText = document.getElementById("prob-text");
-
-        const fL = indexPerguntasFalsas.length;
-
-        console.log(fL);
-
-        let widthPercentage;
-        let probTextResult;
-        let probColor;
-
-        if (fL <= 2) {
-            widthPercentage = "25%";
-            probTextResult = "Risco: Baixo";
-            probColor = "#008000";
-        } else if (fL < 7) {
-            widthPercentage = "50%";
-            probTextResult = "Risco: Médio";
-            probColor = "#FFFF00";
         } else {
-            widthPercentage = "100%";
-            probTextResult = "Risco: Alto";
-            probColor = "#FF0000";
+            container.classList.remove("border", "border-red-500");
+            if (aviso) aviso.remove();
+
+            //se a resposta não corresponde conta como respostaErrada
+            if (
+                (respostaEsperada === "não" && !isTrueChecked) ||
+                (respostaEsperada === "sim" && !isFalseChecked)
+            ) {
+                respostasErradas++;
+            }
         }
-
-        //configurações do resultado
-        probText.textContent = probTextResult;
-        prob.style.transition = "width 0.5s ease, background-color 0.5s ease";
-        prob.style.width = widthPercentage;
-        prob.style.backgroundColor = probColor;
     });
-});
 
+    if (erro) return;
 
+    alert("Número de respostas que não correspondem ao esperado: " + respostasErradas);
 
+    //parte do cálculo de risco e da barra indicativa
+    let widthPercentage;
+    let probTextResult;
+    let probColor;
+
+    if (respostasErradas < 3) {
+        widthPercentage = "25%";
+        probTextResult = "Risco: Baixo";
+        probColor = "#008000";
+    } else if (respostasErradas < 7) {
+        widthPercentage = "50%";
+        probTextResult = "Risco: Médio";
+        probColor = "#FFFF00";
+    } else {
+        widthPercentage = "100%";
+        probTextResult = "Risco: Alto";
+        probColor = "#FF0000";
+    }
+
+    //configurações do resultado
+    const prob = document.getElementById("prob");
+    const probText = document.getElementById("prob-text");
+
+    probText.textContent = probTextResult;
+    prob.style.transition = "width 0.5s ease, background-color 0.5s ease";
+    prob.style.width = widthPercentage;
+    prob.style.backgroundColor = probColor;
+};

@@ -1,35 +1,57 @@
-<!DOCTYPE html5>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/reset.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>M-CHAT - Questionário</title>
 </head>
 
-<header class="bg-blue-950 text-white rounded-b-full py-8">
+<header class="bg-blue-950 text-white rounded-b-full py-4 w-full flex flex-col items-center text-center">
+    <img src="../content/logo.png" class="h-32 w-24 mb-4" alt="Logo M-CHAT">
     <h1 class="text-2xl font-bold">M-CHAT</h1>
     <p>Formulário</p>
 </header>
 
-<body class="bg-slate-200 text-center">
-    <form id="formulario" class="bg-white shadow-sm m-20 rounded-md px-8 py-8">
-        <!-- As divs das perguntas vao ser inseridas aqui-->
-         
+<body class="bg-slate-600 flex flex-col items-center space-y-8">
+    <!--dados consulta-->
+    <div id="dadosConsulta" class="bg-gray-300 text-center rounded-xl p-8 m-8 shadow-md w-full max-w-2xl">
+        <h2 class="text-2xl font-bold mb-6">Dados da Consulta</h2>
+        <div class="space-y-4 text-lg">
+            <p id="nomeMae" class="font-medium">Nome da Mãe: <span class="font-normal"></span></p>
+            <p id="nomeCrianca" class="font-medium">Nome da Criança: <span class="font-normal"></span></p>
+            <p id="idade" class="font-medium">Idade (Meses): <span class="font-normal"></span></p>
+            <p id="sexo" class="font-medium">Sexo: <span class="font-normal"></span></p>
+            <p id="inicio" class="font-medium">Início da Consulta: <span class="font-normal"></span></p>
+        </div>
+    </div>
+
+    <!--form-->
+    <form id="formulario" class="bg-gray-200 shadow-md rounded-xl px-8 py-10 w-full max-w-4xl">
+        <!-- As divs das perguntas vão ser inseridas aqui -->
     </form>
 
-    <button id="verificarRespostas" class="bg-slate-900 text-white px-4 py-2 rounded-md mt-4 pb-4">Fazer Relatório</button>
-    
-    <script src="../js/main.js"></script>
+    <!--submit-->
+    <button id="verificarRespostas" class="bg-slate-900 hover:bg-slate-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200">
+        Fazer Relatório
+    </button>
 
-    <p id="prob-text" class="mt-5">Probabilidade: Baixa</p>
-    <div class="m-8 mt-3 bg-gray-200 rounded-full h-10 dark:bg-gray-70">
-        <div id="prob" class="bg-gray-600 h-10 rounded-full" style="width: 100%;"></div>
+    <!--probabilidade-->
+    <p id="prob-text" class="text-white text-lg font-medium mt-6">Probabilidade: Baixa</p>
+
+    <!--barra de risco-->
+    <div class="w-full max-w-2xl bg-gray-300 rounded-full h-8 overflow-hidden mt-3">
+        <div id="prob" class="bg-white h-8 rounded-full transition-all duration-500" style="width: 100%;"></div>
     </div>
+
+    <script src="../js/main.js"></script>
 
 </body>
 
-<footer class="bg-blue-950 py-8 rounded-t-full text-white font-semibold">
-    &copyM-CHAT Prototype 2025 | Laboratório de Ideias
+<!--rodape-->
+<footer class="bg-blue-950 py-8 rounded-t-full text-white font-semibold w-full text-center mt-8">
+    &copy; M-CHAT 2025 | Laboratório de Ideias
 </footer>
+
 </html>
